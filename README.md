@@ -8,11 +8,11 @@ Um banner responsivo e interativo em HTML, CSS e JavaScript conforme solicitado.
 ✅ **Texto "Verificação Pessoal"** - Posicionado após o ícone  
 ✅ **Link à direita** - Link "Avaliação Pessoal" com ícone de link externo  
 ✅ **100% da largura** - Banner ocupa toda a largura da tela  
-✅ **50px de altura** - Altura fixa conforme solicitado  
+✅ **100px de altura** - Altura fixa conforme solicitado  
 
 ## 🎨 Características do Design
 
-- **Design moderno** com gradiente azul-roxo
+- **Design moderno** com gradiente em tons de vinho (#6c274f)
 - **Totalmente responsivo** para mobile e desktop
 - **Efeitos hover** suaves e animações
 - **Posição fixa** no topo da página

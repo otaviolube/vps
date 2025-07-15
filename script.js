@@ -106,7 +106,7 @@ function toggleBanner(show = true) {
 const style = document.createElement("style");
 style.textContent = `
     .banner.loaded {
-        box-shadow: 0 2px 15px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 2px 15px rgba(108, 39, 79, 0.3);
     }
     
     .banner-icon, .link-icon {
