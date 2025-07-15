@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Efeito de clique no link de avaliação
   evaluationLink.addEventListener("click", function (e) {
-    e.preventDefault();
-
     // Efeito visual de clique
     this.style.transform = "scale(0.95)";
     setTimeout(() => {
@@ -29,12 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       linkIcon.style.transform = "rotate(0deg)";
     }, 300);
 
-    // Simular redirecionamento (substitua pela URL real)
-    setTimeout(() => {
-      alert(
-        'Redirecionando para a página de Avaliação Pessoal...\n\nEm um projeto real, substitua esta linha por:\nwindow.location.href = "sua-url-aqui";'
-      );
-    }, 400);
+    // O link agora abre automaticamente em nova aba
   });
 
   // Efeito de pulsação no ícone principal
@@ -89,6 +82,9 @@ function updateEvaluationLink(newUrl, newText) {
 
   if (newUrl) {
     link.href = newUrl;
+    // Manter target="_blank" para sempre abrir em nova aba
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
   }
 
   if (newText) {

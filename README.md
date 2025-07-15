@@ -66,8 +66,13 @@ Um banner responsivo e interativo em HTML, CSS e JavaScript conforme solicitado.
 
 ### Alterar o Link Dinamicamente:
 ```javascript
-updateEvaluationLink('https://sua-url.com', 'Novo Texto');
+updateEvaluationLink('https://nova-url.com', 'Novo Texto');
 ```
+
+### Link Atual Configurado:
+- **URL:** `https://lms.gebe.mindtech.education/mod/feedback/complete.php?id=27&courseid=2`
+- **Comportamento:** Abre em nova aba (target="_blank")
+- **Segurança:** Inclui rel="noopener noreferrer"
 
 ### Mudar os Ícones:
 - Substitua as classes Font Awesome no HTML
@@ -81,9 +86,10 @@ updateEvaluationLink('https://sua-url.com', 'Novo Texto');
 
 ## 💡 Dicas de Implementação
 
-1. **Para usar em produção:** Substitua o `alert()` no JavaScript por um redirecionamento real
-2. **Para melhor performance:** Considere hospedar o Font Awesome localmente
-3. **Para SEO:** Adicione atributos `alt` e `title` apropriados nos ícones
+1. **Link configurado:** O banner já está direcionando para o sistema LMS de feedback
+2. **Nova aba:** O link abre automaticamente em uma nova página (target="_blank")
+3. **Para melhor performance:** Considere hospedar o Font Awesome localmente
+4. **Para SEO:** Adicione atributos `alt` e `title` apropriados nos ícones
 
 ---
 
