@@ -76,8 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
 // Função para realizar o download da Roda Viva
 function downloadRodaViva() {
   // Simular download - você pode substituir por um arquivo real
-  const fileName = "roda-viva.pdf";
-  const fileUrl = "#"; // Substitua pelo URL real do arquivo
+  const fileName = "roda-da-vida.pdf";
+  const fileUrl =
+    "https://github.com/otaviolube/vps/raw/main/RV-M1-A1-C2/roda-viva.pdf"; // Substitua pelo URL real do arquivo
 
   // Criar elemento temporário para download
   const link = document.createElement("a");
