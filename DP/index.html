@@ -1,311 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experiência em Realidade Virtual</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experiência em Realidade Virtual</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Arial,sans-serif;margin:0;padding-top:100px;background:#f0f0f0}
+    .banner{background:linear-gradient(90deg,#ff6b9d 0%,#c44569 100%);color:#fff;height:100px;padding:10px 20px;display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;width:100%;box-shadow:0 2px 5px rgba(0,0,0,.2);z-index:100}
+    .banner-content{display:flex;align-items:center;justify-content:center;width:100%}
+    .banner-left{display:flex;align-items:center}
+    .banner-image{height:60px;cursor:pointer}
+    .banner-right{margin-left:auto}
+    .demo-content{padding:20px;text-align:center}
 
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding-top: 100px; /* Adjust based on banner height */
-            background-color: #f0f0f0;
-        }
-
-        .banner {
-            background: linear-gradient(90deg, #ff6b9d 0%, #c44569 100%);
-            color: white;
-            height: 100px;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-        }
-
-        .banner-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .banner-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .banner-image {
-            height: 60px; /* Adjust size as needed */
-            cursor: pointer;
-            /* margin-right: 15px; */ /* Removed */
-        }
-
-        /* .banner-text { */ /* Removed */
-        /*    font-size: 1.1rem; */
-        /*    font-weight: bold; */
-        /* } */
-
-        .banner-right {
-            margin-left: auto;
-        }
-
-        .demo-content {
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-dialog {
-            position: relative;
-            width: auto;
-            margin: 0.5rem;
-            pointer-events: none;
-            max-width: 500px; /* Added max-width */
-            margin-right: auto; /* Center the modal */
-            margin-left: auto; /* Center the modal */
-        }
-
-        .modal-dialog-centered {
-            display: flex;
-            align-items: center;
-            min-height: calc(100% - 1rem);
-        }
-
-        .modal-content {
-            border-radius: 16px;
-            background: #EAF7F1; /* fundo menta claro */
-            border: 1px solid #BFE7D3; /* borda suave */
-            box-shadow: 0 10px 30px rgba(0,0,0,.15);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            pointer-events: auto;
-            background-clip: padding-box;
-            outline: 0;
-        }
-
-        .modal-header {
-            background: #0B7A69; /* verde profundo */
-            color: #fff;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            padding: 1rem 1rem;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .modal-title {
-            color: #fff;
-            margin-bottom: 0;
-            line-height: 1.5;
-            font-size: 1.25rem;
-        }
-
-        .modal-body {
-            text-align: center;
-            color: #0f5f4b;
-            position: relative;
-            flex: 1 1 auto;
-            padding: 1rem;
-        }
-
-        .modal-footer {
-            justify-content: center;
-            background: #EAF7F1;
-            border-top: 1px solid #BFE7D3;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            padding: 0.75rem;
-            border-bottom-right-radius: calc(16px - 1px);
-            border-bottom-left-radius: calc(16px - 1px);
-            gap: 10px; /* Added gap for spacing between buttons */
-        }
-
-        .close {
-            color: #fff;
-            opacity: 1;
-            float: right;
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1;
-            text-shadow: 0 1px 0 #fff;
-            background-color: transparent;
-            border: 0;
-            -webkit-appearance: none;
-            cursor: pointer;
-            padding: 1rem 1rem;
-            margin: -1rem -1rem -1rem auto;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: .75;
-        }
-
-        #qrcode-container {
-            display: inline-block;
-            padding: 12px;
-            background: #DDF5E5; /* cartão verde claro */
-            border: 1px solid #8FD8C1; /* contorno menta */
-            border-radius: 12px;
-        }
-
-        .btn {
-            background: #0B7A69; /* botão principal */
-            border-color: #0B7A69;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 10px;
-            padding: 10px 16px;
-            display: inline-block;
-            font-weight: 400;
-            line-height: 1.5;
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-            border: 1px solid transparent;
-            font-size: 1rem;
-            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        }
-
-        .btn:hover {
-            color: #fff;
-            background-color: #085e52;
-            border-color: #07574b;
-        }
-
-        .btn[type="button"] {
-            background: #DDF5E5; /* botão secundário */
-            border: 1px solid #0B7A69;
-            color: #0b7a69;
-        }
-
-        .btn[type="button"]:hover {
-            background-color: #c0e0c8;
-            border-color: #085e52;
-            color: #085e52;
-        }
-
-        @media (max-width: 768px) {
-            .banner-image {
-                height: 50px;
-            }
-            .modal-content {
-                width: 95%;
-                padding: 30px 20px;
-            }
-        }
-    </style>
+    /* --- Modal local (fallback) --- */
+    .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.8);animation:fadeIn .3s ease}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal-dialog{position:relative;width:auto;margin:.5rem;pointer-events:none;max-width:500px;margin-right:auto;margin-left:auto}
+    .modal-dialog-centered{display:flex;align-items:center;min-height:calc(100% - 1rem)}
+    .modal-content{border-radius:16px;background:#EAF7F1;border:1px solid #BFE7D3;box-shadow:0 10px 30px rgba(0,0,0,.15);position:relative;display:flex;flex-direction:column;width:100%;pointer-events:auto;background-clip:padding-box;outline:0}
+    .modal-header{background:#0B7A69;color:#fff;border-top-left-radius:16px;border-top-right-radius:16px;display:flex;align-items:flex-start;justify-content:space-between;padding:1rem 1rem;border-bottom:1px solid #dee2e6}
+    .modal-title{color:#fff;margin-bottom:0;line-height:1.5;font-size:1.25rem}
+    .modal-body{text-align:center;color:#0f5f4b;position:relative;flex:1 1 auto;padding:1rem}
+    .modal-footer{justify-content:center;background:#EAF7F1;border-top:1px solid #BFE7D3;display:flex;flex-wrap:wrap;align-items:center;padding:.75rem;border-bottom-right-radius:calc(16px - 1px);border-bottom-left-radius:calc(16px - 1px);gap:10px}
+    .close{color:#fff;opacity:1;font-size:1.5rem;font-weight:700;line-height:1;background:transparent;border:0;cursor:pointer;padding:1rem 1rem;margin:-1rem -1rem -1rem auto}
+    .close:hover,.close:focus{color:#000;opacity:.75}
+    #qrcode-container{display:inline-block;padding:12px;background:#DDF5E5;border:1px solid #8FD8C1;border-radius:12px}
+    .btn{background:#0B7A69;border-color:#0B7A69;color:#fff;font-weight:600;border-radius:10px;padding:10px 16px;display:inline-block;text-align:center;text-decoration:none;cursor:pointer;border:1px solid transparent;font-size:1rem;transition:color .15s,background-color .15s,border-color .15s,box-shadow .15s}
+    .btn:hover{color:#fff;background:#085e52;border-color:#07574b}
+    .btn[type="button"]{background:#DDF5E5;border:1px solid #0B7A69;color:#0b7a69}
+    .btn[type="button"]:hover{background:#c0e0c8;border-color:#085e52;color:#085e52}
+    @media (max-width:768px){.banner-image{height:50px}.modal-content{width:95%;padding:30px 20px}}
+  </style>
 </head>
 <body>
-    <div class="banner">
-        <div class="banner-content">
-            <div class="banner-left">
-                <img src="BOT_Acrilico_ROSA_VR.png" alt="Experiência em Realidade Virtual" class="banner-image" onclick="openModal()">
-            </div>
-        </div>
-    </div>
-
-    <div class="demo-content">
-        <h1>Conteúdo da Página</h1>
-        <p>Este é um exemplo de como o banner ficaria numa página real.</p>
-    </div>
-
-    <!-- Modal -->
-    <div id="qrModal" class="modal fade" tabindex="-1" role="dialog"
-  aria-labelledby="qrModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 id="qrModalLabel" class="modal-title">Aponte a
-          câmera para acessar</h5>
-        <button class="close" type="button" onclick="closeModal()"
-          data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">×</span> </button>
+  <div class="banner">
+    <div class="banner-content">
+      <div class="banner-left">
+        <!-- Clique chama o modal do PAI; se fora de iframe, usa fallback local -->
+        <img
+          src="BOT_Acrilico_ROSA_VR.png"
+          alt="Experiência em Realidade Virtual"
+          class="banner-image"
+          onclick="openQr()"
+        />
       </div>
-      <div class="modal-body">
-        <p style="margin-bottom: 14px;">Escaneie o QR Code para abrir a
-          experiência em realidade virtual no seu celular.</p>
-        <div id="qrcode-container">
-          <img
-            style="width: 300px; height: 300px; max-width: 80vw; max-height: 80vw; border-radius: 8px;"
-            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=https%3A%2F%2Fvr.gebe.mindtech.education%2F"
-            alt="QR Code para https://vr.gebe.mindtech.education%2F"></div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn"
-          href="https://vr.gebe.mindtech.education/" target="_blank"
-          rel="noopener">Abrir em nova aba</a> <button class="btn"
-          type="button" onclick="closeModal()" data-dismiss="modal"
-          data-bs-dismiss="modal">Fechar</button></div>
     </div>
   </div>
-</div>
-    
-    <script>
-        const vrUrl = 'https://vr.gebe.mindtech.education/';
-        
-        function openModal() {
-            document.getElementById('qrModal').style.display = 'block';
-        }
-        
-        function closeModal() {
-            document.getElementById('qrModal').style.display = 'none';
-        }
-        
-        // Fecha o modal ao clicar fora dele
-        window.onclick = function(event) {
-            const modal = document.getElementById('qrModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-        
-        // Fecha o modal com a tecla ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-    </script>
+
+  <div class="demo-content">
+    <h1>Conteúdo da Página</h1>
+    <p>Este é um exemplo de como o banner ficaria numa página real.</p>
+  </div>
+
+  <!-- Modal LOCAL (fallback para quando não estiver em iframe) -->
+  <div id="qrModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="qrModalLabel" class="modal-title">Aponte a câmera para acessar</h5>
+          <button class="close" type="button" onclick="closeLocalModal()" aria-label="Fechar">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="margin-bottom:14px;">Escaneie o QR Code para abrir a experiência em realidade virtual no seu celular.</p>
+          <div id="qrcode-container">
+            <img
+              id="qrImgLocal"
+              style="width:300px;height:300px;max-width:80vw;max-height:80vw;border-radius:8px;"
+              src=""
+              alt="QR Code"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a id="qrLinkLocal" class="btn" href="#" target="_blank" rel="noopener">Abrir em nova aba</a>
+          <button class="btn" type="button" onclick="closeLocalModal()">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // URL da experiência
+    const vrUrl = 'https://vr.gebe.mindtech.education/';
+
+    // Abre o modal no PAI (Moodle) se estiver em iframe; caso contrário, usa o modal local
+    function openQr() {
+      if (window.top !== window.self) {
+        // Estamos dentro de um iframe → pede ao PAI para abrir o modal global
+        window.parent.postMessage({ type: 'OPEN_QR_MODAL', url: vrUrl, size: 300 }, '*');
+      } else {
+        // Fora de iframe (teste local) → usa fallback local
+        openLocalModal();
+      }
+    }
+
+    /* ======= Fallback local (para testes fora do Moodle) ======= */
+    function openLocalModal() {
+      // Preenche QR e link
+      document.getElementById('qrImgLocal').src =
+        'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(vrUrl);
+      document.getElementById('qrLinkLocal').href = vrUrl;
+
+      document.getElementById('qrModal').style.display = 'block';
+      // Evita scroll de fundo
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLocalModal() {
+      document.getElementById('qrModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // Fecha modal local ao clicar no backdrop
+    window.addEventListener('click', function (e) {
+      const modal = document.getElementById('qrModal');
+      if (e.target === modal) closeLocalModal();
+    });
+
+    // Fecha modal local com ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLocalModal();
+    });
+  </script>
 </body>
 </html>
