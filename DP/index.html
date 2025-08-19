@@ -13,100 +13,57 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            margin: 0;
+            padding-top: 100px; /* Adjust based on banner height */
+            background-color: #f0f0f0;
         }
 
         .banner {
-            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #f8b500 100%);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 800px;
+            background: linear-gradient(90deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            height: 100px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            50% { transform: translateX(0%) translateY(0%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 100;
         }
 
         .banner-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .banner h1 {
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        .vr-icon {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 15px;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
         }
 
-        .vr-icon svg {
-            width: 50px;
-            height: 50px;
-            fill: #ff6b9d;
+        .banner-left {
+            display: flex;
+            align-items: center;
         }
 
-        .cta-button {
-            background: none;
-            border: none;
+        .banner-image {
+            height: 60px; /* Adjust size as needed */
             cursor: pointer;
-            margin-top: 30px;
-            transition: all 0.3s ease;
-            padding: 0;
+            /* margin-right: 15px; */ /* Removed */
         }
 
-        .cta-button img {
-            width: 300px;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+        /* .banner-text { */ /* Removed */
+        /*    font-size: 1.1rem; */
+        /*    font-weight: bold; */
+        /* } */
+
+        .banner-right {
+            margin-left: auto;
         }
 
-        .cta-button:hover img {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .cta-button:active img {
-            transform: translateY(0);
+        .demo-content {
+            padding: 20px;
+            text-align: center;
         }
 
         /* Modal Styles */
@@ -127,87 +84,151 @@
             to { opacity: 1; }
         }
 
-        .modal-content {
-            background: white;
-            margin: 0;
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: slideIn 0.3s ease;
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 0.5rem;
+            pointer-events: none;
+            max-width: 500px; /* Added max-width */
+            margin-right: auto; /* Center the modal */
+            margin-left: auto; /* Center the modal */
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .modal-dialog-centered {
+            display: flex;
+            align-items: center;
+            min-height: calc(100% - 1rem);
+        }
+
+        .modal-content {
+            border-radius: 16px;
+            background: #EAF7F1; /* fundo menta claro */
+            border: 1px solid #BFE7D3; /* borda suave */
+            box-shadow: 0 10px 30px rgba(0,0,0,.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            pointer-events: auto;
+            background-clip: padding-box;
+            outline: 0;
+        }
+
+        .modal-header {
+            background: #0B7A69; /* verde profundo */
+            color: #fff;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 1rem 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .modal-title {
+            color: #fff;
+            margin-bottom: 0;
+            line-height: 1.5;
+            font-size: 1.25rem;
+        }
+
+        .modal-body {
+            text-align: center;
+            color: #0f5f4b;
+            position: relative;
+            flex: 1 1 auto;
+            padding: 1rem;
+        }
+
+        .modal-footer {
+            justify-content: center;
+            background: #EAF7F1;
+            border-top: 1px solid #BFE7D3;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom-right-radius: calc(16px - 1px);
+            border-bottom-left-radius: calc(16px - 1px);
+            gap: 10px; /* Added gap for spacing between buttons */
         }
 
         .close {
-            color: #aaa;
+            color: #fff;
+            opacity: 1;
             float: right;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 15px;
-            right: 25px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 1px 0 #fff;
+            background-color: transparent;
+            border: 0;
+            -webkit-appearance: none;
             cursor: pointer;
+            padding: 1rem 1rem;
+            margin: -1rem -1rem -1rem auto;
         }
 
         .close:hover,
         .close:focus {
             color: #000;
             text-decoration: none;
+            opacity: .75;
         }
 
-        .modal h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+        #qrcode-container {
+            display: inline-block;
+            padding: 12px;
+            background: #DDF5E5; /* cartão verde claro */
+            border: 1px solid #8FD8C1; /* contorno menta */
+            border-radius: 12px;
         }
 
-        .qr-container {
-            margin: 30px 0;
-        }
-
-        #qrcode {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .computer-button {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 25px;
+        .btn {
+            background: #0B7A69; /* botão principal */
+            border-color: #0B7A69;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 10px 16px;
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
             cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            font-size: 1rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
 
-        .computer-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        .btn:hover {
+            color: #fff;
+            background-color: #085e52;
+            border-color: #07574b;
+        }
+
+        .btn[type="button"] {
+            background: #DDF5E5; /* botão secundário */
+            border: 1px solid #0B7A69;
+            color: #0b7a69;
+        }
+
+        .btn[type="button"]:hover {
+            background-color: #c0e0c8;
+            border-color: #085e52;
+            color: #085e52;
         }
 
         @media (max-width: 768px) {
-            .banner h1 {
-                font-size: 2rem;
+            .banner-image {
+                height: 50px;
             }
-            
-            .cta-button img {
-                width: 250px;
-            }
-            
             .modal-content {
                 width: 95%;
                 padding: 30px 20px;
@@ -218,135 +239,57 @@
 <body>
     <div class="banner">
         <div class="banner-content">
-            <h1>EXPERIÊNCIA EM REALIDADE VIRTUAL</h1>
-            
-            
-            <button class="cta-button" onclick="openModal()">
-                <img src="BOT_Acrilico_ROSA_VR.png" alt="Começar Experiência VR">
-            </button>
+            <div class="banner-left">
+                <img src="BOT_Acrilico_ROSA_VR.png" alt="Experiência em Realidade Virtual" class="banner-image" onclick="openModal()">
+            </div>
         </div>
+    </div>
+
+    <div class="demo-content">
+        <h1>Conteúdo da Página</h1>
+        <p>Este é um exemplo de como o banner ficaria numa página real.</p>
     </div>
 
     <!-- Modal -->
-    <div id="qrModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Aponte o celular para o QR Code</h2>
-            <div class="qr-container">
-                <div id="qrcode"></div>
-            </div>
-            <button class="computer-button" onclick="startOnComputer()">
-                Iniciar Experiência no Computador
-            </button>
-        </div>
+    <div id="qrModal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="qrModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="qrModalLabel" class="modal-title">Aponte a
+          câmera para acessar</h5>
+        <button class="close" type="button" onclick="closeModal()"
+          data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">×</span> </button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 14px;">Escaneie o QR Code para abrir a
+          experiência em realidade virtual no seu celular.</p>
+        <div id="qrcode-container">
+          <img
+            style="width: 300px; height: 300px; max-width: 80vw; max-height: 80vw; border-radius: 8px;"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=https%3A%2F%2Fvr.gebe.mindtech.education%2F"
+            alt="QR Code para https://vr.gebe.mindtech.education%2F"></div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn"
+          href="https://vr.gebe.mindtech.education/" target="_blank"
+          rel="noopener">Abrir em nova aba</a> <button class="btn"
+          type="button" onclick="closeModal()" data-dismiss="modal"
+          data-bs-dismiss="modal">Fechar</button></div>
     </div>
-
-    <!-- QR Code Generator Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-    <!-- Biblioteca alternativa como backup -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  </div>
+</div>
     
     <script>
         const vrUrl = 'https://vr.gebe.mindtech.education/';
         
         function openModal() {
             document.getElementById('qrModal').style.display = 'block';
-            generateQRCode();
         }
         
         function closeModal() {
             document.getElementById('qrModal').style.display = 'none';
-        }
-        
-        function generateQRCode() {
-            // Limpa o QR code anterior se existir
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = '';
-            
-            // Método 1: Tenta usar a biblioteca QRCode
-            if (typeof QRCode !== 'undefined') {
-                try {
-                    QRCode.toCanvas(vrUrl, {
-                        width: 250,
-                        height: 250,
-                        colorDark: '#333333',
-                        colorLight: '#ffffff',
-                        margin: 2,
-                        errorCorrectionLevel: 'M'
-                    }, function (error, canvas) {
-                        if (error) {
-                            console.error('Erro no QRCode:', error);
-                            tryQRious();
-                        } else {
-                            console.log('QR Code gerado com QRCode.js!');
-                            qrContainer.appendChild(canvas);
-                        }
-                    });
-                    return;
-                } catch (e) {
-                    console.error('Erro ao usar QRCode.js:', e);
-                }
-            }
-            
-            // Método 2: Tenta usar QRious
-            tryQRious();
-        }
-        
-        function tryQRious() {
-            const qrContainer = document.getElementById('qrcode');
-            
-            if (typeof QRious !== 'undefined') {
-                try {
-                    const qr = new QRious({
-                        value: vrUrl,
-                        size: 250,
-                        foreground: '#333333',
-                        background: '#ffffff'
-                    });
-                    
-                    console.log('QR Code gerado com QRious!');
-                    qrContainer.appendChild(qr.canvas);
-                    return;
-                } catch (e) {
-                    console.error('Erro ao usar QRious:', e);
-                }
-            }
-            
-            // Método 3: Fallback visual
-            createFallbackQRCode();
-        }
-        
-        function createFallbackQRCode() {
-            const qrContainer = document.getElementById('qrcode');
-            
-            // Método 4: Usa API online para gerar QR Code
-            try {
-                const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(vrUrl)}`;
-                qrContainer.innerHTML = `
-                    <div style="display: flex; justify-content: center; align-items: center;">
-                        <img src="${qrApiUrl}" 
-                             alt="QR Code para ${vrUrl}" 
-                             style="width: 250px; height: 250px; border: 2px solid #333;"
-                             onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'width: 250px; height: 250px; background: white; border: 2px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 12px; text-align: center; color: #333;\\'>📱 QR Code<br><div style=\\'word-break: break-all; padding: 10px; font-size: 10px;\\'>${vrUrl}</div><div style=\\'margin-top: 10px; font-size: 10px; color: #666;\\'>Escaneie para acessar</div></div>';">
-                    </div>
-                `;
-                console.log('QR Code gerado via API online!');
-            } catch (e) {
-                // Fallback final: QR Code visual simples
-                qrContainer.innerHTML = `
-                    <div style="width: 250px; height: 250px; background: white; border: 2px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 12px; text-align: center; color: #333; margin: 0 auto;">
-                        <div style="font-weight: bold; margin-bottom: 10px;">📱 QR Code</div>
-                        <div style="word-break: break-all; padding: 10px; font-size: 10px;">${vrUrl}</div>
-                        <div style="margin-top: 10px; font-size: 10px; color: #666;">Escaneie para acessar</div>
-                    </div>
-                `;
-                console.log('Usando fallback visual final do QR Code');
-            }
-        }
-        
-        function startOnComputer() {
-            // Abre o link da experiência VR no computador
-            window.open(vrUrl, '_blank');
         }
         
         // Fecha o modal ao clicar fora dele
