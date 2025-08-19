@@ -11,7 +11,6 @@
     .banner-content{display:flex;align-items:center;justify-content:center;width:100%}
     .banner-left{display:flex;align-items:center}
     .banner-image{height:60px;cursor:pointer}
-    .banner-right{margin-left:auto}
     .demo-content{padding:20px;text-align:center}
 
     /* --- Modal local (fallback) --- */
@@ -54,7 +53,7 @@
     <p>Este é um exemplo de como o banner ficaria numa página real.</p>
   </div>
 
-  <!-- Modal LOCAL (fallback para quando não estiver em iframe) -->
+  <!-- Modal LOCAL (fallback para testes fora do Moodle) -->
   <div id="qrModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -67,12 +66,7 @@
         <div class="modal-body">
           <p style="margin-bottom:14px;">Escaneie o QR Code para abrir a experiência em realidade virtual no seu celular.</p>
           <div id="qrcode-container">
-            <img
-              id="qrImgLocal"
-              style="width:300px;height:300px;max-width:80vw;max-height:80vw;border-radius:8px;"
-              src=""
-              alt="QR Code"
-            />
+            <img id="qrImgLocal" style="width:300px;height:300px;max-width:80vw;max-height:80vw;border-radius:8px;" src="" alt="QR Code"/>
           </div>
         </div>
         <div class="modal-footer">
@@ -87,41 +81,41 @@
     // URL da experiência
     const vrUrl = 'https://vr.gebe.mindtech.education/';
 
-    // Abre o modal no PAI (Moodle) se estiver em iframe; caso contrário, usa o modal local
+    // Envia para o TOP (página do Moodle). Se fora de iframe, usa modal local.
     function openQr() {
-      if (window.top !== window.self) {
-        // Estamos dentro de um iframe → pede ao PAI para abrir o modal global
-        window.parent.postMessage({ type: 'OPEN_QR_MODAL', url: vrUrl, size: 300 }, '*');
-      } else {
-        // Fora de iframe (teste local) → usa fallback local
+      try {
+        if (window.top && window.top !== window.self) {
+          // Envia direto ao topo (página do Moodle)
+          window.top.postMessage({ type: 'OPEN_QR_MODAL', url: vrUrl, size: 300 }, '*');
+          // Também envia ao parent imediato (caso o topo reencaminhe ou para debug)
+          if (window.parent && window.parent !== window.top) {
+            window.parent.postMessage({ type: 'OPEN_QR_MODAL', url: vrUrl, size: 300 }, '*');
+          }
+        } else {
+          openLocalModal();
+        }
+      } catch (e) {
+        // Em caso de sandbox/erro, cai para o fallback local
         openLocalModal();
       }
     }
 
     /* ======= Fallback local (para testes fora do Moodle) ======= */
     function openLocalModal() {
-      // Preenche QR e link
       document.getElementById('qrImgLocal').src =
         'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(vrUrl);
       document.getElementById('qrLinkLocal').href = vrUrl;
-
       document.getElementById('qrModal').style.display = 'block';
-      // Evita scroll de fundo
       document.body.style.overflow = 'hidden';
     }
-
     function closeLocalModal() {
       document.getElementById('qrModal').style.display = 'none';
       document.body.style.overflow = '';
     }
-
-    // Fecha modal local ao clicar no backdrop
     window.addEventListener('click', function (e) {
       const modal = document.getElementById('qrModal');
       if (e.target === modal) closeLocalModal();
     });
-
-    // Fecha modal local com ESC
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLocalModal();
     });
